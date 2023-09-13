@@ -1,0 +1,9 @@
+#正解
+x = list(map(int, input().split()))
+
+for i in range(5):
+    if x[i] == 0:
+        check = i + 1
+        break
+
+print(check)
