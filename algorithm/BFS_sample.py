@@ -1,4 +1,7 @@
 """
+開始のノードからのそれぞれのノードの距離を求める場合。
+存在を確認するだけの場合、distじゃなくてvisitにしてbooleanでも可
+
 n：グラフの頂点の数
 m：グラフの辺の数
 start：経路探索のスタート位置
@@ -18,23 +21,25 @@ for i in range(m):
     g[a].append(b)
     g[b].append(a)
 
+
 def bfs(start):
 
-	# 初期化などなど
-	dist = [-1] * (n + 1)
-	q = queue.Queue()
-	dist[start] = 0
-	q.put(start)
+    # 初期化などなど
+    dist = [-1] * (n + 1)
+    q = queue.Queue()
+    dist[start] = 0
+    q.put(start)
 
-	# 幅優先探索
-	while not q.empty():
-		pos = q.get()
-		for nex in g[pos]:
-			if dist[nex] == -1:
-				dist[nex] = dist[pos] + 1
-				q.put(nex)
+    # 幅優先探索
+    while not q.empty():
+        pos = q.get()
+        for nex in g[pos]:
+            if dist[nex] == -1:
+                dist[nex] = dist[pos] + 1
+                q.put(nex)
 
-	return dist
+    return dist
+
 
 for i in bfs(1):
     print(i)
