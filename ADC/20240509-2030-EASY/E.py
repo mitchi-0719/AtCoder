@@ -1,10 +1,13 @@
+from collections import defaultdict
+
 n = int(input())
-s = []
+s = defaultdict(int)
 
 for i in range(n):
     si = input()
-    if si[0] < si[-1]:
-        si = si[::-1]
-    s.append(si)
+    if si < si[::-1]:
+        s[si] += 1
+    else:
+        s[si[::-1]] += 1
 
-print(len(set(s)))
+print(len(s.keys()))
