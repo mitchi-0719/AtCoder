@@ -1,8 +1,7 @@
 n = int(input())
-
-for _ in range(n):
+for i in range(n):
     a = list(map(int, input().split()))
-    for i, _a in enumerate(a):
+    for j, _a in enumerate(a):
         if _a == 1:
-            print(i + 1, end=" ")
+            print(j + 1, end=" ")
     print()
