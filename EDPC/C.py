@@ -1,14 +1,16 @@
 n = int(input())
 
-dp = [0] * n
+dp = [[-1 for _ in range(n)] for __ in range(3)]
 
-for i in range(n):
-    a = list(map(int, input().split()))
-    if i == 0:
-        dp[0] = max(a)
-        select = a.index(max(a))
-    else:
-        dp[i] = dp[i - 1] + max([a[j] for j in range(3) if j != select])
-        select = a.index(max([a[j] for j in range(3) if j != select]))
+x = [list(map(int, input().split())) for _ in range(n)]
 
-print(dp[-1])
+dp[0][0] = dp[1][0] = dp[2][0] = 0
+
+print(dp)
+for i in range(1, n):
+    for j in range(3):
+        for k in range(3):
+            if j != k:
+                dp[i][j] = max(dp[i][j], dp[i - 1][k] + x[i][j])
+print(dp)
+print(max([dp[n - 1][i] for i in range(3)]))
