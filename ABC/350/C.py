@@ -1,13 +1,14 @@
 n = int(input())
 a = list(map(int, input().split()))
-n = [i + 1 for i in range(n)]
+li = [i + 1 for i in range(n)]
 
 ans = []
-for i in range(n - 1):
-    for j in range(i, n):
-        if a[i] > a[j]:
+while a != li:
+    for i in range(n):
+        j = a[i] - 1
+        if i != j:
+            ans.append(sorted([i + 1, j + 1]))
             a[i], a[j] = a[j], a[i]
-            ans.append([i + 1, j + 1])
 
 print(len(ans))
 for _ans in ans:
