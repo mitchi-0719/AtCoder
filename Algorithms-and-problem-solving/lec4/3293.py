@@ -1,22 +1,17 @@
-def calc(s, k, removes):
-    ans = 0
-    _k = k
-    tmp = 0
-    for i in range(len(s)):
-        if i not in removes:
-            tmp += 10 ** (_k - 1) * int(s[i])
-            _k -= 1
-        if _k == 0:
-            ans += tmp
-            _k = k
-            tmp = 0
-
-    return ans
-
-
 def solve(k):
-    s = input()
-    calc(s, k, [])
+    c = [0] + list(map(int, list(input())))
+    n = len(c)
+    dp = [[-float("inf") for _ in range(k)] for __ in range(n)]
+    dp[0][0] = 0
+
+    for i in range(1, n):
+        for j in range(k):
+            dp[i][j] = max(
+                dp[i - 1][j],
+                dp[i - 1][(j - 1) % k] + c[i] * (10 ** (k - ((j - 1) % k) - 1)),
+            )
+
+    print(dp[n - 1][0])
 
 
 while True:
