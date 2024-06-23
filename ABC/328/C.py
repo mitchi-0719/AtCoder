@@ -1,11 +1,10 @@
 n, q = map(int, input().split())
 s = input()
+acc = [0]
 
-for i in range(q):
+for i in range(n - 1):
+    acc.append(acc[i] + (1 if s[i] == s[i + 1] else 0))
+
+for _ in range(q):
     l, r = map(int, input().split())
-
-    part_s = s[l - 1 : r]
-    ans = 0
-    for j in range(len(part_s) - 1):
-        ans += 1 if part_s[j] == part_s[j + 1] else 0
-    print(ans)
+    print(acc[r - 1] - acc[l - 1])
