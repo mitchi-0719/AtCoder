@@ -1,9 +1,12 @@
+# 解説AC
+
 s = input()
+stack = []
 
-while True:
-    prev_s = s
-    s = s.replace("ABC", "")
-    if prev_s == s:
-        break
+for si in s:
+    stack.append(si)
+    if stack[-3:] == ["A", "B", "C"]:
+        for i in range(3):
+            stack.pop()
 
-print(s)
+print("".join(stack))
