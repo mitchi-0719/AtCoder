@@ -7,9 +7,9 @@ dire = [(0, -1), (1, 0), (0, 1), (-1, 0)]
 dir_i = 0
 
 for i in range(n):
-    g[y][x] = not g[y][x]
+    g[y % h][x % w] = not g[y % h][x % w]
 
-    if not g[y][x]:
+    if not g[y % h][x % w]:
         dir_i -= 1
         x += dire[dir_i % 4][0]
         y += dire[dir_i % 4][1]
