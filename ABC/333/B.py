@@ -1,16 +1,29 @@
-s = sorted(list(input()), reverse=True)
-t = sorted(list(input()), reverse=True)
+def dist(arr1, arr2, c1, c2):
+    d1 = 0
+    i1 = arr1.index(c1)
 
-s_diff = ord(s[0]) - ord(s[1])
-if s_diff == 3:
-    s_diff = 2
-elif s_diff == 4:
-    s_diff = 1
+    i = i1
+    while True:
+        if arr1[i % 5] == c2:
+            d1 = i - i1
+            break
+        i += 1
 
-t_diff = ord(t[0]) - ord(t[1])
-if t_diff == 3:
-    t_diff = 2
-elif t_diff == 4:
-    t_diff = 1
+    d2 = 0
+    i2 = arr2.index(c1)
 
-print("Yes" if s_diff == t_diff else "No")
+    i = i2
+    while True:
+        if arr2[i % 5] == c2:
+            d2 = i - i2
+            break
+        i += 1
+    return min(d1, d2)
+
+
+s = list(input())
+t = list(input())
+c = ["A", "B", "C", "D", "E"]
+c_rev = c[::-1]
+
+print("Yes" if dist(c, c_rev, s[0], s[1]) == dist(c, c_rev, t[0], t[1]) else "No")
