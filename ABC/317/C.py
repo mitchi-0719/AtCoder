@@ -1,26 +1,26 @@
-N, M = map(int, input().split())
-E = [[0] * (N + 1) for _ in range(N + 1)]
-for _ in range(M):
+def dfs(g, dist, s, visited):
+    visited[s] = True
+
+    d = dist
+    for v, c in g[s]:
+        if visited[v]:
+            continue
+
+        d = max(d, dfs(g, dist + c, v, [*visited]))
+
+    return d
+
+
+n, m = map(int, input().split())
+g = [[] for _ in range(n + 1)]
+
+for _ in range(m):
     a, b, c = map(int, input().split())
-    E[a][b] = c
-    E[b][a] = c
+    g[a].append((b, c))
+    g[b].append((a, c))
 
 ans = 0
-used = [False] * (N + 1)
-
-
-def dfs(v, s):
-    global ans
-    used[v] = True
-    if s > ans:
-        ans = s
-    for i in range(1, N + 1):
-        if not used[i] and E[v][i]:
-            dfs(i, s + E[v][i])
-    used[v] = False
-
-
-for i in range(1, N + 1):
-    dfs(i, 0)
+for i in range(n + 1):
+    ans = max(ans, dfs(g, 0, i, [False] * (n + 1)))
 
 print(ans)
