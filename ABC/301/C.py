@@ -1,31 +1,51 @@
-s = input()
-t = input()
+from collections import defaultdict
 
-card = "atcoder"
+s = list(input())
+t = list(input())
+n = len(s)
+at = set(["a", "t", "c", "o", "d", "e", "r"])
 
-s_cnt = 0
-t_cnt = 0
-rm_cnt = 0
+ds = defaultdict(int)
+dt = defaultdict(int)
 
-l = len(s)
+for i in range(n):
+    ds[s[i]] += 1
+    dt[t[i]] += 1
 
-for i in range(l):
-    c = s[i-rm_cnt]
+s_at = s.count("@")
+t_at = t.count("@")
 
-    if t[i-rm_cnt] == "@":
-        t_cnt += 1
-    if c == "@":
-        s_cnt += 1
-        continue
-    if c in t:
-        t = t.replace(c, "", 1)
-        s = s.replace(c, "", 1)
-        rm_cnt += 1
+for i in range(n):
+    if s[i] != "@" and dt[s[i]] != 0:
+        dt[s[i]] -= 1
 
-print(s)
-print(t)
+    if t[i] != "@" and ds[t[i]] != 0:
+        ds[t[i]] -= 1
 
-if len(s) - s_cnt <= t_cnt and len(t) - t_cnt <= s_cnt:
+s_rest = 0
+t_rest = 0
+judge = True
+
+for k, v in ds.items():
+    if k != "@" and k not in at and v != 0:
+        judge = False
+        break
+
+    if k != "@":
+        s_rest += v
+
+for k, v in dt.items():
+    if not judge:
+        break
+
+    if k != "@" and k not in at and v != 0:
+        judge = False
+        break
+
+    if k != "@":
+        t_rest += v
+
+if judge and s_rest <= t_at and t_rest <= s_at:
     print("Yes")
 else:
     print("No")
