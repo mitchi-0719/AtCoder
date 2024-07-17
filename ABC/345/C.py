@@ -1,19 +1,16 @@
 from collections import defaultdict
 
-memo = defaultdict(int)
-
-
-def factorial(n):
-    if memo[n] == 0:
-        if n == 1:
-            memo[n] = 1
-        else:
-            memo[n] = n * factorial(n - 1)
-
-    return memo[n]
-
 
 s = input()
-ans = factorial(len(s)) - len(s)
+n = len(s)
+d = defaultdict(int)
+
+for si in s:
+    d[si] += 1
+
+ans = 1 if max(d.values()) != 1 else 0
+for i in range(25):
+    for j in range(i + 1, 26):
+        ans += d[chr(ord("a") + i)] * d[chr(ord("a") + j)]
 
 print(ans)
