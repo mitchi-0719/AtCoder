@@ -1,9 +1,10 @@
-p = "wbwbwwbwbwbw" * 30
+sub = "wbwbwwbwbwbw" * 100
 
 w, b = map(int, input().split())
-for i in range(len(p) - (w + b)):
-    sub = p[i : i + w + b]
-    if sub.count("w") == w and sub.count("b") == b:
+
+
+for i in range(len(sub) - (w + b)):
+    if w == sub[i : i + w + b].count("w") and b == sub[i : i + w + b].count("b"):
         print("Yes")
         exit()
 

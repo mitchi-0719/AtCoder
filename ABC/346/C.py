@@ -1,11 +1,8 @@
 n, k = map(int, input().split())
-a = set(list(map(int, input().split())) + [k + 1, 0])
-a = sorted([i for i in list(a) if i <= k + 1])
+a = set(map(int, input().split()))
 
-ans = 0
-for i in range(len(a) - 1):
-    n1 = (a[i] * (a[i] + 1)) // 2
-    n2 = (a[i + 1] * (a[i + 1] - 1)) // 2
-    ans += n2 - n1
+ans = (k * (k + 1)) // 2
+for ai in a:
+    ans -= ai if ai <= k else 0
 
 print(ans)
