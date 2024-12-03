@@ -1,20 +1,28 @@
+def isInRange(low, high, x):
+    return low <= x < high
+
+
 def dfs(i, j, level, visited):
-    print(i, j, level, visited)
-    if visited[i][j] or s[i][j] == "#":
+    if not (
+        isInRange(0, h, i)
+        and isInRange(0, w, j)
+        and not visited[i][j]
+        and s[i][j] == "."
+    ):
         return 0
 
-    visited[i][j] = True
     if level == k:
         return 1
 
     move = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     cnt = 0
+    visited[i][j] = True
     for dx, dy in move:
         nex_i = i + dy
         nex_j = j + dx
-        if 0 <= nex_i < h and 0 <= nex_j < w:
-            cnt += dfs(nex_i, nex_j, level + 1, visited[:])
+        cnt += dfs(nex_i, nex_j, level + 1, visited)
 
+    visited[i][j] = False
     return cnt
 
 
