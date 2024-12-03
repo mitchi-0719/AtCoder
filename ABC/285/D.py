@@ -1,33 +1,35 @@
 from collections import defaultdict
+import sys
+
+sys.setrecursionlimit(10**8)
 
 
-def dfs(start, s, visited):
-    nexts = d[s]
-
-    if start == s:
-        print("No")
-        exit()
-
-    if visited[s]:
-        return
-
+def dfs(g, s, visited, finished):
     visited[s] = True
-
-    for nex in nexts:
-        dfs(start, nex, visited)
-
-    visited[s] = False
+    for nex in g[s]:
+        if not visited[nex]:
+            dfs(g, nex, visited, finished)
+        elif not finished[nex]:
+            print("No")
+            exit()
+    finished[s] = True
 
 
 n = int(input())
-d = defaultdict(list)
+g = defaultdict(list)
+names = set()
 visited = defaultdict(bool)
+finished = defaultdict(bool)
+
 for _ in range(n):
     si, ti = input().split()
-    d[si].append(ti)
+    g[si].append(ti)
     visited[si] = False
+    finished[si] = False
+    names.add(si)
 
-for start in d.keys():
-    dfs(start, start, visited)
+for s in names:
+    if not visited[s]:
+        dfs(g, s, visited, finished)
 
 print("Yes")
