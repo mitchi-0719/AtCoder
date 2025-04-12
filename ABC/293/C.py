@@ -1,24 +1,26 @@
+from collections import defaultdict
+
 h, w = map(int, input().split())
-a = []
+a = [list(map(int, input().split())) for _ in range(h)]
+d = defaultdict(bool)
 
-ans = 0
 
-def dfs(i, j, s):
-    if a[i][j] in s:
-        return
-    s.add(a[i][j])
-    if i == h-1 and j == w-1:
-        global ans
-        ans += 1
-        return
-    if j+1 < w: dfs(i, j+1, s)
-    if i+1 < h: dfs(i+1, j, s)
+def dfs(i, j):
+    if d[a[i][j]]:
+        return 0
 
-for i in range(h):
-    A = list(map(int, input().split()))
-    a.append(A)
+    if (i + 1, j + 1) == (h, w):
+        return 1
 
-s = set()
-dfs(0, 0, s)
+    d[a[i][j]] = True
+    cnt = 0
+    if i + 1 < h:
+        cnt += dfs(i + 1, j)
+    if j + 1 < w:
+        cnt += dfs(i, j + 1)
+    d[a[i][j]] = False
 
-print(ans)
+    return cnt
+
+
+print(dfs(0, 0))
