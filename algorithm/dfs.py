@@ -1,14 +1,14 @@
 """
 g: 隣接リスト
 i: 見ているノード
-visit: 到達したノードのリスト
+visited: 到達したノードのリスト
 """
 
 
-def dfs(g, i, visit):
-    if visit[i]:
+def dfs(g, i, visited):
+    if visited[i]:
         return
 
-    visit[i] = True
+    visited[i] = True
     for v in g[i]:
-        dfs(g, v, visit)
+        dfs(g, v, visited)
