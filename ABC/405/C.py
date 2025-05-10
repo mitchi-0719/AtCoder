@@ -1,7 +1,7 @@
 # fmt: off
 from collections import *
 from itertools import *
-import bisect, copy, heapq, math, numpy, string, queue
+import bisect, copy, heapq, math, numpy, string
 import sys
 
 def I(): return int(sys.stdin.readline().rstrip()) # 数値
@@ -13,3 +13,16 @@ def yes_no(b): return "Yes" if b else "No"
 sys.setrecursionlimit(10**8)
 mod = 998244353
 # fmt: on
+
+n = I()
+a = LI()
+
+s = sum(a)
+d = 0
+ans = 0
+
+for i in range(n - 1):
+    d += a[i]
+    ans += a[i] * (s - d)
+
+print(ans)

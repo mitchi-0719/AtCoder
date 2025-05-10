@@ -1,7 +1,7 @@
 # fmt: off
 from collections import *
 from itertools import *
-import bisect, copy, heapq, math, numpy, string, queue
+import bisect, copy, heapq, math, numpy, string
 import sys
 
 def I(): return int(sys.stdin.readline().rstrip()) # 数値
@@ -13,3 +13,25 @@ def yes_no(b): return "Yes" if b else "No"
 sys.setrecursionlimit(10**8)
 mod = 998244353
 # fmt: on
+
+n, m = LI()
+a = LI()
+
+l = [0 for _ in range(m)]
+for ai in a:
+    if ai <= m:
+        l[ai - 1] += 1
+
+if 0 in l:
+    print(0)
+    exit()
+
+cnt = 0
+for ai in a[::-1]:
+    if ai <= m:
+        cnt += 1
+        l[ai - 1] -= 1
+        if l[ai - 1] <= 0:
+            break
+
+print(cnt)

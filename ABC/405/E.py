@@ -1,7 +1,7 @@
 # fmt: off
 from collections import *
 from itertools import *
-import bisect, copy, heapq, math, numpy, string, queue
+import bisect, copy, heapq, math, numpy, string
 import sys
 
 def I(): return int(sys.stdin.readline().rstrip()) # 数値
