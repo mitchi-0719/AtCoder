@@ -6,6 +6,13 @@ if [ "$#" -ne 2 ]; then
   exit 1
 fi
 
+# $x1/$x2 が既に存在する場合は処理を終了
+if [ -d "$1/$2" ]; then
+  echo "Error: Directory $1/$2 already exists."
+
+  exit 1
+fi
+
 # 引数を2つ受け取る
 x1=$1
 x2=$2
