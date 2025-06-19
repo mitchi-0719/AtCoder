@@ -9,8 +9,10 @@ def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値�
 def S(): return sys.stdin.readline().rstrip() # 文字列
 def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
 def yes_no(b): return "Yes" if b else "No"
-def print_nobreak(t, end=""): print(t, end=end)
 
 sys.setrecursionlimit(10**8)
 mod = 998244353
 # fmt: on
+
+s = S()
+print(s.split(".")[-1])

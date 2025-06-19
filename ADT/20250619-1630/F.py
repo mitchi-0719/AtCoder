@@ -9,8 +9,26 @@ def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値�
 def S(): return sys.stdin.readline().rstrip() # 文字列
 def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
 def yes_no(b): return "Yes" if b else "No"
-def print_nobreak(t, end=""): print(t, end=end)
 
 sys.setrecursionlimit(10**8)
 mod = 998244353
 # fmt: on
+
+n, m = LI()
+k = []
+u = [[] for _ in range(n)]
+
+for i in range(m):
+    ki, *a = LI()
+    k.append(ki)
+    for ai in a:
+        u[ai - 1].append(i)
+
+b = LI()
+ans = 0
+for bi in b:
+    for ui in u[bi - 1]:
+        k[ui] -= 1
+        if k[ui] == 0:
+            ans += 1
+    print(ans)
