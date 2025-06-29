@@ -14,5 +14,4 @@ def print_nobreak(t, end=""): print(t, end=end)
 
 sys.setrecursionlimit(10**8)
 mod = 998244353
-inf = float("inf")
 # fmt: on
