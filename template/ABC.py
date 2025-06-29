@@ -2,6 +2,7 @@
 from collections import *
 from itertools import *
 import bisect, copy, heapq, math, numpy, string, queue
+from sortedcontainers import *
 import sys
 
 def I(): return int(sys.stdin.readline().rstrip()) # 数値

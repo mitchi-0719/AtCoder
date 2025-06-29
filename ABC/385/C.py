@@ -1,13 +1,36 @@
-from collections import defaultdict
+# fmt: off
+from collections import *
+from itertools import *
+import bisect, copy, heapq, math, numpy, string, queue
+import sys
 
-n = int(input())
-h = list(map(int, input().split()))
+def I(): return int(sys.stdin.readline().rstrip()) # 数値
+def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値リスト
+def S(): return sys.stdin.readline().rstrip() # 文字列
+def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
+def yes_no(b): return "Yes" if b else "No"
+def print_nobreak(t, end=""): print(t, end=end)
 
-d = defaultdict(list)
-ans = 1
+sys.setrecursionlimit(10**8)
+mod = 998244353
+# fmt: on
 
+n = I()
+h = LI()
+
+ans = 0
 for i in range(n):
-    d[h[i]].append(i)
+    for j in range(1, n + 1):
+        k = 1
+        bef = h[i]
+        cnt = 1
+        while 1:
+            if i + j * k >= n or bef != h[i + j * k]:
+                break
+            bef = h[i + j * k]
+            cnt += 1
+            k += 1
 
-# for v in d.items():
-#     for k in range(ans, )
+        ans = max(ans, cnt)
+
+print(ans)

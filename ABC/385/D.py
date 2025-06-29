@@ -1,9 +1,24 @@
-import bisect
-from sortedcontainers import SortedSet
-from collections import defaultdict
+# fmt: off
+from collections import *
+from itertools import *
+import bisect, copy, heapq, math, numpy, string, queue
+from sortedcontainers import *
+import sys
 
-n, m, x, y = map(int, input().split())
-xy = [list(map(int, input().split())) for _ in range(n)]
+def I(): return int(sys.stdin.readline().rstrip()) # 数値
+def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値リスト
+def S(): return sys.stdin.readline().rstrip() # 文字列
+def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
+def yes_no(b): return "Yes" if b else "No"
+def print_nobreak(t, end=""): print(t, end=end)
+
+sys.setrecursionlimit(10**8)
+mod = 998244353
+# fmt: on
+
+
+n, m, x, y = LI()
+xy = [LI() for _ in range(n)]
 dx = defaultdict(SortedSet)
 dy = defaultdict(SortedSet)
 nx, ny = x, y
@@ -21,7 +36,7 @@ for x, y in xy:
 
 ans = 0
 for _ in range(m):
-    d, c = input().split()
+    d, c = LS()
     c = int(c)
 
     if d == "U":
