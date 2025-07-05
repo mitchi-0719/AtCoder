@@ -1,38 +1,29 @@
-#AC
+# fmt: off
+from collections import *
+from itertools import *
+import bisect, copy, heapq, math, numpy, string, queue
+from sortedcontainers import *
+import sys
 
-n = int(input())
-C = [0] * n
-P = [0] * n
-S1 = [0] * n
-S2 = [0] * n
+def I(): return int(sys.stdin.readline().rstrip()) # 数値
+def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値リスト
+def S(): return sys.stdin.readline().rstrip() # 文字列
+def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
+def yes_no(b): return "Yes" if b else "No"
+def print_nobreak(t, end=""): print(t, end=end)
 
-for i in range(n):
-    C[i], P[i] = map(int, input().split())
-    if i == 0:
-        if C[i] == 1:
-            S1[i] = P[i]
-        else:
-            S2[i] = P[i]
-    else:
-        if C[i] == 1:
-            S1[i] = S1[i - 1] + P[i]
-            S2[i] = S2[i - 1]
-        else:
-            S1[i] = S1[i - 1]
-            S2[i] = S2[i - 1] + P[i]
+sys.setrecursionlimit(10**8)
+mod = 998244353
+inf = float("inf")
+# fmt: on
 
-q = int(input())
-L = [0] * q
-R = [0] * q
+n = I()
+cp = [LI() for _ in range(n)]
 
-for i in range(q):
-    L[i], R[i] = map(int, input().split())
-    if L[i] == 1:
-        left_S1 = 0
-        left_S2 = 0
-    else:
-        left_S1 = S1[L[i] - 2]
-        left_S2 = S2[L[i] - 2]
-    C_one = S1[R[i] - 1] - left_S1
-    C_two = S2[R[i] - 1] - left_S2
-    print(C_one, C_two)
+c1 = [0] + list(accumulate([cp[i][1] if cp[i][0] == 1 else 0 for i in range(n)]))
+c2 = [0] + list(accumulate([cp[i][1] if cp[i][0] == 2 else 0 for i in range(n)]))
+
+q = I()
+for _ in range(q):
+    l, r = LI()
+    print(c1[r] - c1[l - 1], c2[r] - c2[l - 1])

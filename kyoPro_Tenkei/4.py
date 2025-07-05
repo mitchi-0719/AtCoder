@@ -1,18 +1,29 @@
-#AC
+# fmt: off
+from collections import *
+from itertools import *
+import bisect, copy, heapq, math, numpy, string, queue
+from sortedcontainers import *
+import sys
 
-h, w = map(int, input().split())
-A = [list(map(int, input().split())) for i in range(h)]
+def I(): return int(sys.stdin.readline().rstrip()) # 数値
+def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値リスト
+def S(): return sys.stdin.readline().rstrip() # 文字列
+def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
+def yes_no(b): return "Yes" if b else "No"
+def print_nobreak(t, end=""): print(t, end=end)
 
-col_sum = [0] * w
-row_sum = [0] * h
+sys.setrecursionlimit(10**8)
+mod = 998244353
+inf = float("inf")
+# fmt: on
 
-for i in range(w):
-    for j in range(h):
-        col_sum[i] += A[j][i]
-        row_sum[j] += A[j][i]
+h, w = LI()
+a = [LI() for _ in range(h)]
+r_sum = [sum([a[i][j] for j in range(w)]) for i in range(h)]
+c_sum = [sum([a[i][j] for i in range(h)]) for j in range(w)]
 
 for i in range(h):
+    tmp = []
     for j in range(w):
-        ans = col_sum[j] + row_sum[i] - A[i][j]
-        print(ans, end=" ")
-    print()
+        tmp.append(r_sum[i] + c_sum[j] - a[i][j])
+    print(*tmp)
