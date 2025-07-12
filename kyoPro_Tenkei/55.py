@@ -13,3 +13,14 @@ def yes_no(b): return "Yes" if b else "No"
 sys.setrecursionlimit(10**8)
 mod = 998244353
 # fmt: on
+
+n, p, q = LI()
+A = LI()
+comb = combinations(A, 5)
+ans = 0
+
+for ci in comb:
+    a, b, c, d, e = ci
+    ans += 1 if a % p * b % p * c % p * d % p * e % p == q else 0
+
+print(ans)

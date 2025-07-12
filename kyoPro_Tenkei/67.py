@@ -14,5 +14,30 @@ sys.setrecursionlimit(10**8)
 mod = 998244353
 # fmt: on
 
-n, p, q = LI()
-a = LI()
+
+def base_n(num_10, n):
+    str_n = ""
+    while num_10:
+        if num_10 % n >= 10:
+            return -1
+        str_n += str(num_10 % n)
+        num_10 //= n
+    return str_n[::-1]
+
+
+def base_10(num_n, n):
+    num_10 = 0
+    for s in str(num_n):
+        num_10 *= n
+        num_10 += int(s)
+    return num_10
+
+
+n, k = LI()
+
+for i in range(k):
+    num10 = base_10(n, 8)
+    num9 = base_n(num10, 9)
+    n = num9.replace("8", "5")
+
+print(n if n != "" else 0)

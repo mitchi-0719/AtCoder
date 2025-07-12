@@ -16,3 +16,28 @@ sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
 # fmt: on
+
+# nとmの最大公約数は m と (n/mのあまり)の最大公約数に等しい
+
+memo = defaultdict(lambda: float("inf"))
+
+
+def gcd(n, m):
+    if m == 0:
+        return n
+    else:
+        if memo[(n, m)] != float("inf"):
+            return memo[(n, m)]
+
+        memo[(n, m)] = gcd(m, n % m)
+        return memo[(n, m)]
+
+
+a, b, c = LI()
+
+n = gcd(a, gcd(b, c))
+ans = 0
+for i in [a, b, c]:
+    ans += i // n - 1
+
+print(ans)

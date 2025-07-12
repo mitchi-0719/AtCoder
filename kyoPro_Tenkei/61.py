@@ -13,3 +13,15 @@ def yes_no(b): return "Yes" if b else "No"
 sys.setrecursionlimit(10**8)
 mod = 998244353
 # fmt: on
+
+q = I()
+d = deque()
+
+for _ in range(q):
+    t, x = LI()
+    if t == 1:
+        d.appendleft(x)
+    elif t == 2:
+        d.append(x)
+    else:
+        print(d[x - 1])
