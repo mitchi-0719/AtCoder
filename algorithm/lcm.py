@@ -1,18 +1,10 @@
 # nとmの最小公倍数は n*m // nとnの最大公約数で求められる。
-from collections import defaultdict
-
-memo = defaultdict(lambda: float("inf"))
+from functools import lru_cache
 
 
+@lru_cache(maxsize=None)
 def gcd(n, m):
-    if m == 0:
-        return n
-    else:
-        if memo[(n, m)] != float("inf"):
-            return memo[(n, m)]
-
-        memo[(n, m)] = gcd(m, n % m)
-        return memo[(n, m)]
+    return n if m == 0 else gcd(m, n % m)
 
 
 def lcm(n, m):

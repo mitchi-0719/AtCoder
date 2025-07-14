@@ -3,7 +3,6 @@ from collections import *
 from itertools import *
 import bisect, copy, heapq, math, numpy, string, queue
 from sortedcontainers import *
-from functools import lru_cache
 import sys
 
 def I(): return int(sys.stdin.readline().rstrip()) # 数値
@@ -17,3 +16,16 @@ sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
 # fmt: on
+
+n, q = LI()
+a = LI()
+d = 0
+
+for _ in range(q):
+    t, x, y = [i - 1 for i in LI()]
+    if t == 0:
+        a[(x + d) % n], a[(y + d) % n] = a[(y + d) % n], a[(x + d) % n]
+    elif t == 1:
+        d -= 1
+    else:
+        print(a[(x + d) % n])

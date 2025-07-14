@@ -18,28 +18,22 @@ inf = float("inf")
 # fmt: on
 
 
-def calc(a, b):
-    ab = sum([ai * bi for ai, bi in zip(a, b)])
-    an = math.sqrt(sum([ai**2 for ai in a]))
-    bn = math.sqrt(sum([bi**2 for bi in b]))
-    if an == 0 or bn == 0:
-        return 0
+def calc(e):
+    theta = e / t * 2 * math.pi
+    y = -l / 2 * math.sin(theta)
+    z = l / 2 - math.cos(theta) * l / 2
+    b = math.sqrt(X**2 + (Y - y) ** 2)
 
-    return math.acos(ab / (an * bn))
+    return math.atan2(z, b) / math.pi * 180
 
 
 t = I()
-l, x, y = LI()
+l, X, Y = LI()
 q = I()
+t2 = t / 2
+t4 = t / 4
+chokudai = [X, Y, 0]
 
 for _ in range(q):
-    e = I() % t
-    if e == 0:
-        print(calc([0, 0, 0], [x, y, 0]))
-    elif e < t / 2:
-        p = l / (t / 2 / e)
-        print(calc([0, -p, p], [x, y, 0]))
-    else:
-        e = e - t / 2
-        p = l / (t / 2 / e)
-        print(calc([0, p, p], [x, y, 0]))
+    e = I()
+    print(calc(e))

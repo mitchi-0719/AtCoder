@@ -1,18 +1,9 @@
-# nとmの最大公約数は m と (n/mのあまり)の最大公約数に等しい
-from collections import defaultdict
-
-memo = defaultdict(lambda: float("inf"))
+from functools import lru_cache
 
 
+@lru_cache(maxsize=None)
 def gcd(n, m):
-    if m == 0:
-        return n
-    else:
-        if memo[(n, m)] != float("inf"):
-            return memo[(n, m)]
-
-        memo[(n, m)] = gcd(m, n % m)
-        return memo[(n, m)]
+    return n if m == 0 else gcd(m, n % m)
 
 
 a, b = map(int, input().split())

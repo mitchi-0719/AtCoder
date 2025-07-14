@@ -18,4 +18,4 @@ inf = float("inf")
 # fmt: on
 
 a, b, c = LI()
-print(yes_no(math.log2(a) < b * math.log2(c)))
+print(yes_no(a < c**b))

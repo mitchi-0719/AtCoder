@@ -17,3 +17,18 @@ sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
 # fmt: on
+
+
+@lru_cache(maxsize=None)
+def gcd(n, m):
+    return n if m == 0 else gcd(m, n % m)
+
+
+def lcm(n, m):
+    return (n * m) // gcd(n, m)
+
+
+a, b = map(int, input().split())
+ans = lcm(a, b)
+
+print(ans if ans <= 10**18 else "Large")
