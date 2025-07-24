@@ -9,7 +9,7 @@ else
 
     for p in A B C D E F G H; do
         if [ ! -f "./ADT/$1/$p.py" ]; then
-            cp ./template/ADT.py "./ADT/$1/$p.py"
+            cp ./template/ABC.py "./ADT/$1/$p.py"
         fi
         code "./ADT/$1/$p.py"
     done
