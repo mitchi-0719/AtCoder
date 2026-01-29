@@ -16,8 +16,6 @@ def print_nobreak(t, end=""): print(t, end=end)
 sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
-
-dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
-dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
-
 # fmt: on
+
+print("".join("0" + S()[:3]))

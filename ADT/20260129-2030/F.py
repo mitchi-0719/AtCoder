@@ -16,8 +16,14 @@ def print_nobreak(t, end=""): print(t, end=end)
 sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
-
-dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
-dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
-
 # fmt: on
+
+k = I()
+_321likes = [0]
+
+for n in range(1, 11):
+    for i in range(1, 10):
+        for c in list(combinations([str(j) for j in range(i)], n - 1)):
+            _321likes.append(int(str(i) + "".join(reversed(c))))
+
+print(sorted(_321likes)[k])

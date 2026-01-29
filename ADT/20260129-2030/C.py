@@ -16,8 +16,19 @@ def print_nobreak(t, end=""): print(t, end=end)
 sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
-
-dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
-dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
-
 # fmt: on
+
+
+def n_to_10(n, k):
+    su = 0
+    for i in range(len(n)):
+        su += int(n[::-1][i]) * (k**i)
+
+    return su
+
+
+k = I()
+a, b = LS()
+
+
+print(n_to_10(a, k) * n_to_10(b, k))

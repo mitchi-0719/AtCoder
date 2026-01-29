@@ -21,3 +21,17 @@ dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
 # fmt: on
+
+n = I()
+a = [list(S()) for _ in range(n)]
+mx = 0
+
+for i in range(n):
+    for j in range(n):
+        for dx, dy in dir8:
+            tmp = ""
+            for d in range(n):
+                tmp += a[(i + dx * d) % n][(j + dy * d) % n]
+            mx = max(int(tmp), mx)
+
+print(mx)
