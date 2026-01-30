@@ -16,10 +16,14 @@ def print_nobreak(t, end=""): print(t, end=end)
 sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
-yes = "Yes"
-no = "No"
 
 dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
 # fmt: on
+
+n = I()
+s = S().replace("1", "l").replace("0", "o")
+t = S().replace("1", "l").replace("0", "o")
+
+print(yes_no(all([si == ti for si, ti in zip(s, t)])))

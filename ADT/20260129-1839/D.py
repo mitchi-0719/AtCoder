@@ -16,10 +16,21 @@ def print_nobreak(t, end=""): print(t, end=end)
 sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
-yes = "Yes"
-no = "No"
 
 dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
 # fmt: on
+
+d = defaultdict(int)
+
+for _ in range(I()):
+    q = LI()
+    if q[0] == 1:
+        d[q[1]] += 1
+    else:
+        mn = min(d.keys())
+        print(mn)
+        d[mn] -= 1
+        if d[mn] == 0:
+            del d[mn]

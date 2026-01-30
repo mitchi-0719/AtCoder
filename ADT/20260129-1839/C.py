@@ -16,10 +16,20 @@ def print_nobreak(t, end=""): print(t, end=end)
 sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
-yes = "Yes"
-no = "No"
 
 dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
 # fmt: on
+
+abcdef = LI()
+ghijkl = LI()
+is_zero = False
+
+for i in range(3):
+    if abcdef[i + 3] <= ghijkl[i] or ghijkl[i + 3] <= abcdef[i]:
+        print("No")
+        exit()
+
+
+print("Yes")

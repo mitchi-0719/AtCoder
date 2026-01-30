@@ -16,10 +16,17 @@ def print_nobreak(t, end=""): print(t, end=end)
 sys.setrecursionlimit(10**8)
 mod = 998244353
 inf = float("inf")
-yes = "Yes"
-no = "No"
 
 dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
 # fmt: on
+
+n = I()
+p = LI()
+q = LI()
+
+q_s, p_s = zip(*sorted(zip(q, p)))
+
+for i in range(n):
+    print_nobreak(q[p_s[i] - 1], " ")
