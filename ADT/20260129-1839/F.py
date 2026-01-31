@@ -24,3 +24,38 @@ dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
 n, a, b = LI()
 s = S()
+st = 0 if s[0] == "a" else 1
+
+cnt = []
+
+bef = ""
+for si in s:
+    if si == bef:
+        cnt[-1] += 1
+    else:
+        cnt.append(1)
+
+    bef = si
+
+l, r = 0, 0
+ans = 0
+
+ab_total = {"a": 0, "b": 0}
+i = 0
+print(ab_total)
+while 1:
+    if ab_total["a"] >= a and ab_total["b"] < b:
+        ans += 1
+
+    if ab_total["a"] < a:
+        r += 1
+        if r == n:
+            break
+        ab_total[s[r]] += 1
+    else:
+        ab_total[s[l]] -= 1
+        l += 1
+
+    print(ab_total, ans)
+
+print(ans)
