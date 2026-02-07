@@ -2,5 +2,5 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
-  "cSpell.words": ["paiza", "setrecursionlimit"]
+  "cSpell.words": ["atcoder", "lazysegtree", "paiza", "setrecursionlimit"]
 }
