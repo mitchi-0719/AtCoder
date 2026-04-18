@@ -11,23 +11,23 @@ nex: posと連結している頂点
 dist: startから各頂点の距離
 """
 
-import queue
+from collections import deque
 
 
 def bfs(g, n, start):
 
     # 初期化などなど
     dist = [-1] * (n + 1)
-    q = queue.Queue()
+    q = deque()
     dist[start] = 0
-    q.put(start)
+    q.append(start)
 
     # 幅優先探索
-    while not q.empty():
-        pos = q.get()
+    while len(q) != 0:
+        pos = q.popleft()
         for nex in g[pos]:
             if dist[nex] == -1:
                 dist[nex] = dist[pos] + 1
-                q.put(nex)
+                q.append(nex)
 
     return dist
