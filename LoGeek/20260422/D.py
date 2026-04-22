@@ -34,12 +34,13 @@ for i in range(1, n):
     li, ri = lr[i]
 
     if r >= li:
-        r = ri
+        r = max(r, ri)
     else:
         ans.append((l, r))
         l, r = li, ri
 
 ans.append((l, r))
+
 for l, r in ans:
     print(l, r)
 

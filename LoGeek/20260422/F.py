@@ -23,3 +23,37 @@ dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
 # fmt: on
+
+h, w = LI()
+s = [list(S()) for _ in range(h)]
+snuke = "snuke"
+
+v = [[False for _ in range(w)] for _ in range(h)]
+
+
+def dfs(prev, cur, i):
+    x, y = cur
+    if cur == (w - 1, h - 1) and s[y][x] == snuke[i % 5]:
+        return True
+
+    if s[y][x] != snuke[i % 5]:
+        return False
+
+    v[y][x] = True
+    for dx, dy in dir4:
+        nex = (x + dx, y + dy)
+        if (
+            0 <= x + dx < w
+            and 0 <= y + dy < h
+            and nex != prev
+            and not v[y + dy][x + dx]
+        ):
+            res = dfs(cur, nex, i + 1)
+            if res:
+                return True
+
+    v[y][x] = False
+    return False
+
+
+print(yes_no(dfs((-1, -1), (0, 0), 0)))
