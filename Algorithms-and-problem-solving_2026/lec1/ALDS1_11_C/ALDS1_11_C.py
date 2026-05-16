@@ -24,12 +24,24 @@ dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 # fmt: on
 
+n = I()
+g = [[] for _ in range(n)]
 
-def solve():
+for i in range(n):
+    [u, k, *v] = LI()
+    for vi in sorted(v):
+        g[u - 1].append(vi - 1)
 
-    if True:  # 終了条件
-        return 1
+q = deque([0])
+d = [-1 for _ in range(n)]
+d[0] = 0
 
+while q:
+    v = q.popleft()
+    for nex in g[v]:
+        if d[nex] == -1:
+            d[nex] = d[v] + 1
+            q.append(nex)
 
-while not solve():
-    ...
+for i in range(n):
+    print(i + 1, d[i])

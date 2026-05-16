@@ -25,11 +25,43 @@ dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 # fmt: on
 
 
-def solve():
+n = I()
+g = [[] for _ in range(n)]
 
-    if True:  # 終了条件
-        return 1
+for i in range(n):
+    [u, k, *v] = LI()
+    for vi in sorted(v):
+        g[u - 1].append(vi - 1)
 
 
-while not solve():
-    ...
+d = [-1 for _ in range(n)]
+f = [-1 for _ in range(n)]
+t = 0
+
+v = [False for _ in range(n)]
+
+
+def dfs(cur):
+    global t
+
+    t += 1
+    d[cur] = t
+    v[cur] = True
+
+    for nex in g[cur]:
+        if not v[nex]:
+            dfs(nex)
+    t += 1
+    f[cur] = t
+
+
+for i in range(n):
+    if v[i]:
+        continue
+    dfs(i)
+
+    if v.count(False) == 0:
+        break
+
+for i in range(n):
+    print(i + 1, d[i], f[i])
