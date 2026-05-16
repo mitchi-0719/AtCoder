@@ -5,14 +5,13 @@ import bisect, copy, heapq, math, numpy, string, queue
 from sortedcontainers import *
 from functools import lru_cache
 import sys
-from pprint import pprint
 
 def I(): return int(sys.stdin.readline().rstrip()) # 数値
 def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値リスト
 def S(): return sys.stdin.readline().rstrip() # 文字列
 def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
 def yes_no(b): return "Yes" if b else "No"
-def sigma(n): (n * (n + 1)) // 2
+def print_nobreak(t, end=""): print(t, end=end)
 
 sys.setrecursionlimit(10**8)
 mod = 998244353
@@ -23,27 +22,23 @@ no = "No"
 dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 
-
 # fmt: on
 
-n = I()
-ab = [LI() for _ in range(n)]
-ans = 2**n
+t = I()
 
-flip = [False] * (n - 1)
 
-for i in range(n - 1):
-    ai, bi = ab[i]
-    aj, bj = ab[i + 1]
+def solve():
+    n = I()
+    wp = [LI() for _ in range(n)]
+    wp_score = sorted([[w, p, p - w] for w, p in wp], key=lambda x: x[2], reverse=True)
+    ans = 0
 
-    if aj == bj and aj in (ai, bi):
-        print(0)
-        exit()
+    for w, p, s in wp_score:
+        if s <= 0:
+            ans += 1
 
-    flip[i] = sum([0 if j == k else 1 for j in ab[i] for k in ab[i + 1]]) % 4
+    print(ans)
 
-f_count = flip.count(0)
 
-ans -= 2**f_count * (sum(flip) + flip[-1])
-
-print(ans % mod)
+for _ in range(t):
+    solve()
