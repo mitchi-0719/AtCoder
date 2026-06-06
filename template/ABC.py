@@ -14,9 +14,11 @@ mod = 998244353
 inf = float("inf")
 
 def I(): return int(sys.stdin.readline().rstrip()) # 数値
+def F(): return float(sys.stdin.readline().rstrip()) # 小数値
 def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値リスト
-def S(): return sys.stdin.readline().rstrip() # 文字列
+def SI(): return sys.stdin.readline().rstrip() # 文字列
 def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
+def DL(init, n, m): return [[init for _ in range(m)] for __ in range(n)]
 def yes_no(b): return yes if b else no
 def sigma(n): (n * (n + 1)) // 2
 

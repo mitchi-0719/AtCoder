@@ -28,6 +28,9 @@ else
   echo "Output differs:"
   echo "============"
   diff "$temp_output" "$x1/$x2/out.txt"
+  echo "============"
+  echo "Expected Output:"
+  cat "$x1/$x2/out.txt"
 fi
 echo "============"
 
