@@ -12,7 +12,7 @@ else
 
     for p in A B C D E; do
         if [ ! -f "./ABC/$1/$p.py" ]; then
-            cp ./template/ABC.py "./ABC/$1/$p.py"
+            cp ./template/ABC/main.py "./ABC/$1/$p.py"
         fi
         code "./ABC/$1/$p.py"
     done
