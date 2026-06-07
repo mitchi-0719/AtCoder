@@ -1,0 +1,38 @@
+# fmt: off
+from collections import *
+from itertools import *
+import bisect, copy, heapq, math, numpy, string, queue
+from sortedcontainers import *
+from functools import lru_cache
+import sys
+from pprint import pprint
+
+sys.setrecursionlimit(10**8)
+yes = "Yes"
+no = "No"
+mod = 998244353
+inf = float("inf")
+
+def I(): return int(sys.stdin.readline().rstrip()) # 数値
+def LI(): return list(map(int, sys.stdin.readline().rstrip().split())) # 数値リスト
+def S(): return sys.stdin.readline().rstrip() # 文字列
+def LS(): return list(sys.stdin.readline().rstrip().split()) # 文字列リスト
+def yes_no(b): return yes if b else no
+def sigma(n): (n * (n + 1)) // 2
+
+
+dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
+dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
+# fmt: on
+
+n, a, b = LI()
+
+s = [["." for _ in range(n * b)] for __ in range(n * a)]
+
+for i in range(n * a):
+    for j in range(n * b):
+        if (i // a % 2 == 1 or j // b % 2 == 1) and i // a % 2 + j // b % 2 == 1:
+            s[i][j] = "#"
+
+for si in s:
+    print("".join(si))
