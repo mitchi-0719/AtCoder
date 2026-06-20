@@ -26,3 +26,29 @@ def sigma(n): return (n * (n + 1)) // 2
 dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 # fmt: on
+from atcoder.segtree import SegTree
+
+N = I()
+H, L = [], []
+for _ in range(N):
+    h, l = LI()
+    H.append(h)
+    L.append(l)
+
+
+L, H = zip(*sorted(zip(L, H)))
+ans = defaultdict(int)
+
+Q = I()
+T = LI()
+
+
+def op(ele1, ele2):
+    return max(ele1, ele2)
+
+
+seg = SegTree(op, -inf, H)
+
+for t in T:
+    i = bisect.bisect_right(L, t)
+    print(seg.prod(i, N))
