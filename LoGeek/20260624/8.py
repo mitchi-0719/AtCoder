@@ -7,7 +7,7 @@ from functools import lru_cache
 import sys
 from pprint import pprint
 
-sys.setrecursionlimit(10**8)
+sys.setrecursionlimit(10**7)
 yes = "Yes"
 no = "No"
 mod = 998244353
@@ -27,31 +27,41 @@ dir8 = [(-1,-1), (0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0)]
 dir4 = [(0, -1), (1, 0),(0, 1), (-1, 0)]
 # fmt: on
 
-H, W, D = LI()
-A = [LI() for _ in range(H)]
-idx = [()] * (H * W)
-for i in range(H):
-    for j in range(W):
-        idx[A[i][j] - 1] = (i, j)
+N = I()
+C = LI()
+G = [[] for _ in range(N)]
 
-acc = [[0] for _ in range(D)]
+for _ in range(N - 1):
+    A, B = LI()
+    A -= 1
+    B -= 1
 
-for k in range(D):
-    for i in range(k + D, H * W, D):
-        x1, y1 = idx[i - D]
-        x2, y2 = idx[i]
-        prev = acc[k][-1]
-        acc[k].append(prev + abs(x1 - x2) + abs(y1 - y2))
+    G[A].append(B)
+    G[B].append(A)
 
-Q = I()
-for _ in range(Q):
-    L, R = LI()
-    i = (L - 1) % D
-    print(acc[i][(R - 1) // D] - acc[i][(L - 1) // D])
+ans = [0]
+
+
+def dfs(prev, cur, ans, s):
+    for v in G[cur]:
+        if v == prev:
+            continue
+
+        c = C[v]
+        if c not in s:
+            ans.append(v)
+        s.add(c)
+        dfs(cur, v, ans, s)
+        s.remove(c)
+
+
+dfs(-1, 0, ans, SortedList([C[0]]))
+
+for a in sorted(ans):
+    print(a + 1)
 
 """
-解説AC
+AC
 
-Dが固定だから、遷移の流れは一定。
-遷移の重みをmod Dごとに持っておき、それの累積和で高速に計算が可能。
+マルチセットとかdictを使ってこれまでの数を数えればよき
 """
