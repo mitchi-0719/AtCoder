@@ -1,7 +1,7 @@
 # fmt: off
 from collections import *
 from itertools import *
-import bisect, copy, heapq, math, numpy, string, queue
+import bisect, copy, heapq, math,  string, queue
 from sortedcontainers import *
 from functools import lru_cache
 import sys
