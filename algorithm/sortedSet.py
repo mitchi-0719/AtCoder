@@ -1,16 +1,13 @@
 # https://github.com/tatyam-prime/SortedSet/blob/main/SortedSet.py
 import math
 from bisect import bisect_left, bisect_right
-from typing import Generic, Iterable, Iterator, List, Tuple, TypeVar, Optional
-
-T = TypeVar("T")
 
 
-class SortedSet(Generic[T]):
+class SortedSet:
     BUCKET_RATIO = 16
     SPLIT_RATIO = 24
 
-    def __init__(self, a: Iterable[T] = []) -> None:
+    def __init__(self, a):
         "Make a new SortedSet from iterable. / O(N) if sorted and unique / O(N log N)"
         a = list(a)
         n = len(a)
@@ -28,43 +25,43 @@ class SortedSet(Generic[T]):
             for i in range(num_bucket)
         ]
 
-    def __iter__(self) -> Iterator[T]:
+    def __iter__(self):
         for i in self.a:
             for j in i:
                 yield j
 
-    def __reversed__(self) -> Iterator[T]:
+    def __reversed__(self):
         for i in reversed(self.a):
             for j in reversed(i):
                 yield j
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other):
         return list(self) == list(other)
 
-    def __len__(self) -> int:
+    def __len__(self):
         return self.size
 
-    def __repr__(self) -> str:
+    def __repr__(self):
         return "SortedSet" + str(self.a)
 
-    def __str__(self) -> str:
+    def __str__(self):
         s = str(list(self))
         return "{" + s[1 : len(s) - 1] + "}"
 
-    def _position(self, x: T) -> Tuple[List[T], int, int]:
+    def _position(self, x):
         "return the bucket, index of the bucket and position in which x should be. self must not be empty."
         for i, a in enumerate(self.a):
             if x <= a[-1]:
                 break
         return (a, i, bisect_left(a, x))
 
-    def __contains__(self, x: T) -> bool:
+    def __contains__(self, x):
         if self.size == 0:
             return False
         a, _, i = self._position(x)
         return i != len(a) and a[i] == x
 
-    def add(self, x: T) -> bool:
+    def add(self, x):
         "Add an element and return True if added. / O(√N)"
         if self.size == 0:
             self.a = [[x]]
@@ -80,14 +77,14 @@ class SortedSet(Generic[T]):
             self.a[b : b + 1] = [a[:mid], a[mid:]]
         return True
 
-    def _pop(self, a: List[T], b: int, i: int) -> T:
+    def _pop(self, a, b, i):
         ans = a.pop(i)
         self.size -= 1
         if not a:
             del self.a[b]
         return ans
 
-    def discard(self, x: T) -> bool:
+    def discard(self, x):
         "Remove an element and return True if removed. / O(√N)"
         if self.size == 0:
             return False
@@ -97,31 +94,31 @@ class SortedSet(Generic[T]):
         self._pop(a, b, i)
         return True
 
-    def lt(self, x: T) -> Optional[T]:
+    def lt(self, x):
         "Find the largest element < x, or None if it doesn't exist."
         for a in reversed(self.a):
             if a[0] < x:
                 return a[bisect_left(a, x) - 1]
 
-    def le(self, x: T) -> Optional[T]:
+    def le(self, x):
         "Find the largest element <= x, or None if it doesn't exist."
         for a in reversed(self.a):
             if a[0] <= x:
                 return a[bisect_right(a, x) - 1]
 
-    def gt(self, x: T) -> Optional[T]:
+    def gt(self, x):
         "Find the smallest element > x, or None if it doesn't exist."
         for a in self.a:
             if a[-1] > x:
                 return a[bisect_right(a, x)]
 
-    def ge(self, x: T) -> Optional[T]:
+    def ge(self, x):
         "Find the smallest element >= x, or None if it doesn't exist."
         for a in self.a:
             if a[-1] >= x:
                 return a[bisect_left(a, x)]
 
-    def __getitem__(self, i: int) -> T:
+    def __getitem__(self, i):
         "Return the i-th element."
         if i < 0:
             for a in reversed(self.a):
@@ -135,7 +132,7 @@ class SortedSet(Generic[T]):
                 i -= len(a)
         raise IndexError
 
-    def pop(self, i: int = -1) -> T:
+    def pop(self, i=-1):
         "Pop and return the i-th element."
         if i < 0:
             for b, a in enumerate(reversed(self.a)):
@@ -149,7 +146,7 @@ class SortedSet(Generic[T]):
                 i -= len(a)
         raise IndexError
 
-    def index(self, x: T) -> int:
+    def index(self, x):
         "Count the number of elements < x."
         ans = 0
         for a in self.a:
@@ -158,7 +155,7 @@ class SortedSet(Generic[T]):
             ans += len(a)
         return ans
 
-    def index_right(self, x: T) -> int:
+    def index_right(self, x):
         "Count the number of elements <= x."
         ans = 0
         for a in self.a:
