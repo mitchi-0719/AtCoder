@@ -1,3 +1,6 @@
+# nまでの素数を列挙する
+
+
 def get_prime(n):
     sieve = [True] * (n + 1)
     i = 2
